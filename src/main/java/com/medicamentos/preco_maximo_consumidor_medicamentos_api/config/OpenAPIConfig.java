@@ -8,6 +8,7 @@ import io.swagger.v3.oas.models.security.OAuthFlow;
 import io.swagger.v3.oas.models.security.OAuthFlows;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +16,10 @@ import org.springframework.context.annotation.Configuration;
 public class OpenAPIConfig {
 
     private static final String SECURITY_SCHEME_NAME = "keycloakAuth";
+    @Value("${keycloak.authorization-url}")
+    private String authorizationUrl;
+    @Value("${keycloak.token-url}")
+    private String tokenUrl;
 
     @Bean
     public OpenAPI customOpenAPI() {
@@ -35,8 +40,8 @@ public class OpenAPIConfig {
                                 .type(SecurityScheme.Type.OAUTH2)
                                 .flows(new OAuthFlows()
                                         .authorizationCode(new OAuthFlow()
-                                                .authorizationUrl("http://localhost:8888/realms/preco-maximo-consumidor-medicamentos-realm/protocol/openid-connect/auth")
-                                                .tokenUrl("http://localhost:8888/realms/preco-maximo-consumidor-medicamentos-realm/protocol/openid-connect/token")
+                                                .authorizationUrl(authorizationUrl)
+                                                .tokenUrl(tokenUrl)
                                                 .scopes(new io.swagger.v3.oas.models.security.Scopes())
                                         )
                                 )
