@@ -24,28 +24,27 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("API de Preço Máximo ao Consumidor (PMC) de Medicamentos")
-                        .version("v1.0")
-                        .description("API RESTful para consulta do Preço Máximo ao Consumidor (PMC) de medicamentos, regulamentado pela CMED (Câmara de Regulação do Mercado de Medicamentos).")
-                        .termsOfService("http://swagger.io/terms/")
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+            .info(new Info()
+                    .title("API de Preço Máximo ao Consumidor (PMC) de Medicamentos")
+                    .version("v1.0")
+                    .description("API RESTful para consulta do Preço Máximo ao Consumidor (PMC) de medicamentos, regulamentado pela CMED (Câmara de Regulação do Mercado de Medicamentos).")
+                    .termsOfService("http://swagger.io/terms/")
+                    .license(new License().name("Apache 2.0").url("http://springdoc.org")))
 
-                .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
+            .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
 
-                // Define os componentes de segurança, incluindo o esquema OAuth2
-                .components(new Components()
-                        .addSecuritySchemes(SECURITY_SCHEME_NAME, new SecurityScheme()
-                                .name(SECURITY_SCHEME_NAME)
-                                .type(SecurityScheme.Type.OAUTH2)
-                                .flows(new OAuthFlows()
-                                        .authorizationCode(new OAuthFlow()
-                                                .authorizationUrl(authorizationUrl)
-                                                .tokenUrl(tokenUrl)
-                                                .scopes(new io.swagger.v3.oas.models.security.Scopes())
-                                        )
-                                )
-                        )
-                );
+            .components(new Components()
+                    .addSecuritySchemes(SECURITY_SCHEME_NAME, new SecurityScheme()
+                            .name(SECURITY_SCHEME_NAME)
+                            .type(SecurityScheme.Type.OAUTH2)
+                            .flows(new OAuthFlows()
+                                    .authorizationCode(new OAuthFlow()
+                                            .authorizationUrl(authorizationUrl)
+                                            .tokenUrl(tokenUrl)
+                                            .scopes(new io.swagger.v3.oas.models.security.Scopes())
+                                    )
+                            )
+                    )
+            );
     }
 }
