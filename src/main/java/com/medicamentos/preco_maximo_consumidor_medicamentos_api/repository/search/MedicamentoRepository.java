@@ -17,14 +17,11 @@ public interface MedicamentoRepository extends ElasticsearchRepository<Medicamen
             "        \"multi_match\": {" +
             "          \"query\": \"?0\"," +
             "          \"type\": \"bool_prefix\"," +
+            "          \"analyzer\": \"brazilian_folding\"," +
             "          \"fields\": [" +
-            "            \"PRODUTO^3\"," +
-            "            \"PRINCIPIO_ATIVO^2\"," +
-            "            \"APRESENTACAO^1\"," +
-            "            \"LABORATORIO^0.5\"," +
             "            \"PRODUTO.suggest^3\"," +
             "            \"PRINCIPIO_ATIVO.suggest^2\"," +
-            "            \"APRESENTACAO.suggest^1\"," +
+            "            \"APRESENTACAO.suggest^5\"," +
             "            \"LABORATORIO.suggest^0.5\"" +
             "          ]" +
             "        }" +
@@ -40,6 +37,17 @@ public interface MedicamentoRepository extends ElasticsearchRepository<Medicamen
             "            { \"term\": { \"PRINCIPIO_ATIVO_UNICO\": true } }" +
             "          ]," +
             "          \"boost\": 10" +
+            "        }" +
+            "      }," +
+            "      {" +
+            "        \"multi_match\": {" +
+            "          \"query\": \"?0\"," +
+            "          \"type\": \"phrase\"," +
+            "          \"fields\": [" +
+            "            \"PRODUTO\"," +
+            "            \"PRINCIPIO_ATIVO\"" +
+            "          ]," +
+            "          \"boost\": 50" +
             "        }" +
             "      }" +
             "    ]" +
