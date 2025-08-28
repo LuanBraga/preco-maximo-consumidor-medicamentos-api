@@ -4,10 +4,9 @@ import com.medicamentos.preco_maximo_consumidor_medicamentos_api.dto.Medicamento
 import com.medicamentos.preco_maximo_consumidor_medicamentos_api.model.search.Medicamento;
 import com.medicamentos.preco_maximo_consumidor_medicamentos_api.repository.search.MedicamentoRepository;
 import com.medicamentos.preco_maximo_consumidor_medicamentos_api.service.MedicamentoAutocompleteService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MedicamentoAutocompleteServiceImpl implements MedicamentoAutocompleteService {
@@ -19,14 +18,12 @@ public class MedicamentoAutocompleteServiceImpl implements MedicamentoAutocomple
     }
 
     @Override
-    public List<MedicamentoAutocompleteDTO> getAutocompleteSugestoes(String termo) {
-        // 1. Busca os dados brutos do Elasticsearch
-        List<Medicamento> medicamentos = medicamentoRepository.findAutocompleteSuggestions(termo);
+    public Page<MedicamentoAutocompleteDTO> getAutocompleteSugestoes(String termo, Pageable pageable) {
+        // 1. Busca os dados paginados do Elasticsearch
+        Page<Medicamento> medicamentosPage = medicamentoRepository.findAutocompleteSuggestions(termo, pageable);
 
-        // 2. Mapeia a lista de Entidades (Medicamento) para uma lista de DTOs
-        return medicamentos.stream()
-                .map(this::convertToAutocompleteDTO)
-                .collect(Collectors.toList());
+        // 2. Mapeia a página de Entidades (Medicamento) para uma página de DTOs
+        return medicamentosPage.map(this::convertToAutocompleteDTO);
     }
 
     /**
