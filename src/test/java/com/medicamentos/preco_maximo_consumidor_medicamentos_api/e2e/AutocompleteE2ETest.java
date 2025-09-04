@@ -1,4 +1,4 @@
-package com.medicamentos.preco_maximo_consumidor_medicamentos_api;
+package com.medicamentos.preco_maximo_consumidor_medicamentos_api.e2e;
 
 import com.medicamentos.preco_maximo_consumidor_medicamentos_api.model.search.Medicamento;
 import com.medicamentos.preco_maximo_consumidor_medicamentos_api.repository.search.MedicamentoRepository;
