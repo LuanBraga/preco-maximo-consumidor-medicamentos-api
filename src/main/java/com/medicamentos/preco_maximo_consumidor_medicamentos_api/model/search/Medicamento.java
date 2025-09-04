@@ -15,11 +15,10 @@ import org.springframework.data.elasticsearch.annotations.InnerField;
 public class Medicamento {
 
     @Id
-    @Field(name = "REGISTRO_CMED", type = FieldType.Keyword)
-    private String registroCmed;
+    private String id;
 
     @MultiField(
-            mainField = @Field(name = "PRODUTO", type = FieldType.Text, analyzer = "brazilian"), // <-- CORREÇÃO APLICADA
+            mainField = @Field(name = "PRODUTO", type = FieldType.Text, analyzer = "brazilian"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -27,7 +26,7 @@ public class Medicamento {
     private String produto;
 
     @MultiField(
-            mainField = @Field(name = "PRINCIPIO_ATIVO", type = FieldType.Text, analyzer = "brazilian"), // <-- CORREÇÃO APLICADA
+            mainField = @Field(name = "PRINCIPIO_ATIVO", type = FieldType.Text, analyzer = "brazilian"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -35,7 +34,7 @@ public class Medicamento {
     private String principioAtivo;
 
     @MultiField(
-            mainField = @Field(name = "APRESENTACAO", type = FieldType.Text, analyzer = "brazilian"), // <-- CORREÇÃO APLICADA
+            mainField = @Field(name = "APRESENTACAO", type = FieldType.Text, analyzer = "brazilian"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -43,7 +42,7 @@ public class Medicamento {
     private String apresentacao;
 
     @MultiField(
-            mainField = @Field(name = "LABORATORIO", type = FieldType.Text, analyzer = "brazilian"), // <-- CORREÇÃO APLICADA
+            mainField = @Field(name = "LABORATORIO", type = FieldType.Text, analyzer = "brazilian"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
