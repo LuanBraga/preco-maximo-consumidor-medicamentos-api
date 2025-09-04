@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MedicamentoAutocompleteDTO {
 
-    private String registroCmed;
+    private String id;
     private String produto;
     private String principioAtivo;
     private String apresentacao;

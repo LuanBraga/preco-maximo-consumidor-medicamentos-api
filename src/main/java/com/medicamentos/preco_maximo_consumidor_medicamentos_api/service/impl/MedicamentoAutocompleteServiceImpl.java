@@ -31,7 +31,7 @@ public class MedicamentoAutocompleteServiceImpl implements MedicamentoAutocomple
      */
     private MedicamentoAutocompleteDTO convertToAutocompleteDTO(Medicamento medicamento) {
         return new MedicamentoAutocompleteDTO(
-                medicamento.getRegistroCmed(),
+                medicamento.getId(),
                 medicamento.getProduto(),
                 medicamento.getPrincipioAtivo(),
                 medicamento.getApresentacao(),
