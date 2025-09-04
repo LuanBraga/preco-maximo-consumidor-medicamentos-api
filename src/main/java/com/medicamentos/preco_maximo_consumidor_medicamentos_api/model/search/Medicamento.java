@@ -11,14 +11,14 @@ import org.springframework.data.elasticsearch.annotations.InnerField;
 
 @Getter
 @Setter
-@Document(indexName = "medicamentos")
+@Document(indexName = "medicamentos", createIndex = false)
 public class Medicamento {
 
     @Id
     private String id;
 
     @MultiField(
-            mainField = @Field(name = "PRODUTO", type = FieldType.Text, analyzer = "brazilian"),
+            mainField = @Field(name = "PRODUTO", type = FieldType.Text, analyzer = "brazilian_folding"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -26,7 +26,7 @@ public class Medicamento {
     private String produto;
 
     @MultiField(
-            mainField = @Field(name = "PRINCIPIO_ATIVO", type = FieldType.Text, analyzer = "brazilian"),
+            mainField = @Field(name = "PRINCIPIO_ATIVO", type = FieldType.Text, analyzer = "brazilian_folding"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -34,7 +34,7 @@ public class Medicamento {
     private String principioAtivo;
 
     @MultiField(
-            mainField = @Field(name = "APRESENTACAO", type = FieldType.Text, analyzer = "brazilian"),
+            mainField = @Field(name = "APRESENTACAO", type = FieldType.Text, analyzer = "brazilian_folding"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
@@ -42,7 +42,7 @@ public class Medicamento {
     private String apresentacao;
 
     @MultiField(
-            mainField = @Field(name = "LABORATORIO", type = FieldType.Text, analyzer = "brazilian"),
+            mainField = @Field(name = "LABORATORIO", type = FieldType.Text, analyzer = "brazilian_folding"),
             otherFields = {
                     @InnerField(suffix = "suggest", type = FieldType.Search_As_You_Type)
             }
